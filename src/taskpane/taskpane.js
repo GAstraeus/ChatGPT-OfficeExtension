@@ -9,10 +9,12 @@ async function initializeChatGPT() { //THIS INITIALIZATION WONT BE REQUIRED IF U
     // Set the prompt for GPT-3 to respond to
     // const seed = 'The NYC personal injury law firm of David Resnick & Associates, P.C. provides professional and caring legal assistance to victims of injury and negligence in the New York City area. \nDavid Resnick founded the firm in 1998 after working in large law firms where he saw a need for greater client communication and more personal care. He wanted to help everyday folks who have had the misfortune to be injured in an accident. His early experiences at other firms taught him that personal care and attention, as well as communication with clients, should be the cornerstones of a law practice – principles that he found lacking elsewhere. \nHis effort to change the way attorneys relate to their clients started when he launched his own legal practice from a tiny office in his apartment in the city. His wife, a student at the time, helped out by answering phones in between classes. \nDavid Resnick & Associates, P.C. has grown into a successful New York personal injury law firm in midtown Manhattan. Although the firm has grown, Resnick’s dedication to client relationships and his core values remain the same. \nConstant communication is key at David Resnick & Associates, P.C. He frequently visits clients in their homes or at the hospital in order to fully understand the trauma that an accident has caused. Meeting a client’s family is something that David Resnick believes is an important part of many injury cases because when one member of a family is injured, other family members often suffer as well. David Resnick is devoted to his own family, and he understands that clients and their loved ones need help to rebuild their lives after a traumatic accident. \nWhat Our Clients Say \nDavid Resnick & Associates were very professional and helpful in my time of need. Very sympathetic to my situation. The end result was more then I expected and I’m more then satisfied. I highly recommend David Resnick & Associates for the best representation. On a personal note I felt comfortable... \n- Carlos \nAt David Resnick & Associates, P.C., we understand how the victim of an accident feels and we also understand that as a victim, you are essentially putting your future in our hands when you retain our firm to represent you.';
     const seed = 'The NYC personal injury law firm of David Resnick & Associates, P.C. provides professional and caring legal assistance to victims of injury and negligence in the New York City area';
-    await sendMessageToChatGPT(seed);
+    
+    // UNCOMMENT THE LINE UNDER THIS IF YOU NEED THE SEED
+    // await sendMessageToChatGPT(seed);
 }
 
-  async function sendMessageToChatGPT(message) { //THIS INITIALIZATION WONT BE REQUIRED IF USING CUSTOM MODEL
+  async function sendMessageToChatGPT(message) {
     try {
       // Set the prompt for GPT-3 to respond to
       let token_count =  message.split(" ").length;
@@ -21,7 +23,7 @@ async function initializeChatGPT() { //THIS INITIALIZATION WONT BE REQUIRED IF U
         prompt: message,
         model: 'text-davinci-003',
         temperature: 0.5,
-        max_tokens: 2000-token_count+2
+        max_tokens: 2000-token_count-1 // Change this to say 4000-token_count-1 during demos
       };
       // Call the GPT-3 API
       console.log(`Sending Message`);
@@ -57,6 +59,8 @@ Office.onReady((info) => {
 
 export async function submitHandler(event) {
   return Word.run(async (context) => {
+    document.getElementById("loading-animation").style.visibility = 'visible';
+
     var message = document.getElementById("text-input-for-chat-gpt").value;
     let reply = await getMessageFromChatGPT(message);
 
@@ -64,6 +68,8 @@ export async function submitHandler(event) {
     for (let i = 0; i < reply_lines.length; i++) {
       context.document.body.insertParagraph(reply_lines[i], Word.InsertLocation.end);
     }
+
     await context.sync();
+    document.getElementById("loading-animation").style.visibility = 'hidden';
   });
 }
