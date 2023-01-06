@@ -26,13 +26,19 @@
         <p>David Resnick & Associates, P.C. ChatGPT Portal</p>
     </header>
     <div class="rendered-form">
-        <div class="text-input">
-            <label for="text-input" class="text-input">What do you need written? <br> </label>
-            <input type="text" class="form-control" name="text-input" access="false" id="text-input-for-chat-gpt">
-        </div>
-        <div class="button">
-            <button type="submit" class="btn-default btn" name="submit-chat" access="false" id="submit-chat">Submit</button>
-        </div>
+        <form>
+            <div class="key-input">
+                <label for="key-input" class="key-input">Enter your provided key<br> </label>
+                <input type="text" class="form-control" name="key-input" access="false" id="key-for-chat-gpt" required>
+            </div>
+            <div class="text-input">
+                <label for="text-input" class="text-input"><h3>What do you need written?</h3> <br> </label>
+                <textarea type="textarea" class="form-control" name="text-input" access="false" id="text-input-for-chat-gpt" required></textarea>
+            </div>
+            <div class="button">
+                <button type="submit" class="btn-default btn" name="submit-chat" access="false" id="submit-chat">Submit</button>
+            </div>
+        </form>
     </div>
     <img id="loading-animation" src="../../assets/loading_animation.gif" width="100" style="visibility: hidden"/>
 </body>
