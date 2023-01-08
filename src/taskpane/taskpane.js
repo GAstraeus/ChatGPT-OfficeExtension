@@ -45,11 +45,11 @@ Office.onReady((info) => {
   if (info.host === Office.HostType.Word) {
     document.getElementById("submit-chat").onclick = submitHandler;
   }
-  initializeChatGPT();
 });
 
 export async function submitHandler(event) {
   return Word.run(async (context) => {
+    document.getElementById("submit-chat").disabled = true;
     document.getElementById("loading-animation").style.visibility = 'visible';
     API_KEY = document.getElementById("key-for-chat-gpt").value;
     var message = document.getElementById("text-input-for-chat-gpt").value;
@@ -62,5 +62,6 @@ export async function submitHandler(event) {
 
     await context.sync();
     document.getElementById("loading-animation").style.visibility = 'hidden';
+    document.getElementById("submit-chat").disabled = false;
   });
 }
