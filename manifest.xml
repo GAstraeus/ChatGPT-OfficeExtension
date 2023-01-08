@@ -11,6 +11,9 @@
   <SupportUrl DefaultValue="https://hellotinker.com/contact"/>
   <AppDomains>
     <AppDomain>https://www.hellotinker.com</AppDomain>
+    <AppDomain>https://wordasktinker.z13.web.core.windows.net</AppDomain>
+    <AppDomain>https://wordasktinker.z13.web.core.windows.net</AppDomain>
+    <AppDomain>https://api.openai.com</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Document"/>
